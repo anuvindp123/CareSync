@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using WebAPI_Wa.Dto.Request;
-using WebAPI_Wa.Manager;
 using WebAPI_Wa.Models;
 using WebAPI_Wa.Models.Enums;
 using WebAPI_Wa.Models.CareSync;
-using WebAPI_Wa.Models.Requests;
 using System.ComponentModel;
 using System.Reflection;
 
@@ -17,12 +15,10 @@ namespace WebAPI_Wa.Controllers
     [ApiController]
     public class PatientController : Controller
     {
-
-        private readonly IPatientManager _patientManager;
+       
         private readonly Wa_DbContext _context;
-        public PatientController(IPatientManager patientManager, Wa_DbContext context)
-        {
-            _patientManager = patientManager;
+        public PatientController(Wa_DbContext context)
+        {           
             _context = context;
         }
         [HttpPost]
