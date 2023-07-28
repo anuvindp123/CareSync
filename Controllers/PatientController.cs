@@ -5,6 +5,8 @@ using WebAPI_Wa.Models.Requests;
 
 namespace WebAPI_Wa.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class PatientController : Controller
     {
         private readonly IPatientManager _patientManager;
@@ -12,7 +14,8 @@ namespace WebAPI_Wa.Controllers
         {
             _patientManager = patientManager;
         }
-        public IActionResult PatientRegistration(PatientRegistrationRequest request)
+        [HttpPost]
+        public ActionResult PatientRegistration(PatientRegistrationRequest request)
         {
             var user = new Patient
             {
@@ -27,7 +30,7 @@ namespace WebAPI_Wa.Controllers
             };
             var ok = _patientManager.AddPatient(user);
 
-            return View();
+            return Ok(true);
         }
     }
 }
