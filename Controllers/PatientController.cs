@@ -9,13 +9,16 @@ using WebAPI_Wa.Models.CareSync;
 using System.ComponentModel;
 using System.Reflection;
 using System.Threading.Tasks;
+using WebAPI_Wa.CommonFunctions;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using WebAPI_Wa.Dto.Response;
 
 namespace WebAPI_Wa.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PatientController : Controller
+    public class PatientController : ControllerBase
     {
 
         private readonly Wa_DbContext _context;
@@ -23,33 +26,37 @@ namespace WebAPI_Wa.Controllers
         {
             _context = context;
         }
-        [HttpPost]
-        public ActionResult PatientRegistration(PatientRegistrationRequest request)
+        [HttpPost("PatientRegistration")]
+        public async Task<ActionResult> PatientRegistration(PatientRegistrationRequest request)
         {
             var user = new Patient
             {
                 FirstName = request.FirstName,
-                LastName = request.LastName,
+                LastName = request.LastName,                
                 AadharId = request.AadharId,
                 Email = request.Email,
                 MobileNumber = request.MobNumber,
-                DOB = request.DOB,
+                DOB = request.DOB.Date,
                 Password = request.Password,
-                BloodGroups = request.BloodGroup,
+                Sex = request.Sex
+                ,
+                uuid = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString()
             };
             _context.patients.Add(user);
-
+            _context.SaveChanges();
             return Ok(true);
         }
-        [HttpPost]
-        public IActionResult UpdatePatientInfo(PatientUpdateInfoRequest request)
+        [HttpPost("UpdatePatientInfo")]
+        public async Task<ActionResult> UpdatePatientInfo(PatientUpdateInfoRequest request)
         {
-            var user = _context.patients.Where(x => x.Id == request.Id).First();
+            var user = await _context.patients.Where(x => x.Id == request.Id).FirstOrDefaultAsync();
             user.Weight = request.Weight;
             user.Height = request.Height;
+            user.BloodGroups = request.BloodGroup.GetEnumDescription();
             user.ProxyName = request.ProxyName;
             user.ProxyEmail = request.ProxyEmail;
             user.ProxyMobileNumber = request.ProxyMobileNumber;
+            user.ProxyDOB = request.ProxyDOB.Date;
             user.ProxyDOB = request.ProxyDOB;
             user.Address = request.Address;
             user.Pincode = request.Pincode;
@@ -58,32 +65,23 @@ namespace WebAPI_Wa.Controllers
             _context.SaveChanges();
             return Ok(true);
         }
-        public static class EnumDescriptionHelper
+
+        [HttpGet("GetPatientBasicInformation")]
+        public async Task<ActionResult> GetPatientBasicInformation(string patientUuid)
         {
-            public static List<string> GetEnumDescriptions(Type enumType)
+            var patient = await _context.patients.Where(x => x.uuid == patientUuid).FirstOrDefaultAsync();
+            GetPatientBasicInformationResponse obj = new GetPatientBasicInformationResponse();
+            if (patient != null)
             {
-                if (!enumType.IsEnum)
-                    throw new ArgumentException("The provided type is not an enum.");
-
-                var enumDescriptions = new List<string>();
-
-                foreach (var enumValue in Enum.GetValues(enumType))
-                {
-                    string description = GetEnumDescription((Enum)enumValue);
-                    enumDescriptions.Add(description);
-                }
-
-                return enumDescriptions;
+                obj.patientName = patient.FirstName + " " + patient.LastName;
+                obj.phoneNumber = patient.MobileNumber;
+                obj.dateOfBirth = patient.DOB.ToString();
+                obj.email = patient.Email;
+                obj.Id = patient.Id;
             }
-
-            private static string GetEnumDescription(Enum enumValue)
-            {
-                FieldInfo fieldInfo = enumValue.GetType().GetField(enumValue.ToString());
-                DescriptionAttribute[] attributes = fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false) as DescriptionAttribute[];
-
-                return attributes?.FirstOrDefault()?.Description ?? enumValue.ToString();
-            }
+            return Ok(obj);
         }
+
         [HttpGet]
         public List<string> GetAllDepartments()
         {
