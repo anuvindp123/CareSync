@@ -12,10 +12,11 @@ namespace WebAPI_Wa.Dto.Request
         public int DoctorId { get; set; }
         public ConsultationType ConsultationType { get; set; }
         public DateTime AdmissionDate { get; set; }
-        public DateTime? DischargeDate { get; set; }
+        public DateTime DischargeDate { get; set; }
         public string DoctorNote { get; set; }
         public List<Medications> Medications { get; set; }
         public List<Diseases> Disease { get; set; }
+        public List<SpecialDate> SpecialDates { get; set; }
         public string Treatment { get; set; }
         public Department Department { get; set; }
         public bool IsConsultationActive { get; set; }
