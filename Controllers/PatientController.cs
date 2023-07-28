@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using WebAPI_Wa.Dto.Request;
 using WebAPI_Wa.Manager;
 using WebAPI_Wa.Models;
+using WebAPI_Wa.Models.CareSync;
 using WebAPI_Wa.Models.Requests;
 
 namespace WebAPI_Wa.Controllers
@@ -32,14 +34,14 @@ namespace WebAPI_Wa.Controllers
                 DOB = request.DOB,
                 Password = request.Password,
             };
-            var ok = _patientManager.AddPatient(user);
+            _context.patients.Add(user);
 
             return Ok(true);
         }
         [HttpPost]
         public IActionResult UpdatePatientInfo(PatientUpdateInfoRequest request)
         {
-            var user = _context.patient.Where(x => x.Id == request.Id).First();
+            var user = _context.patients.Where(x => x.Id == request.Id).First();
             user.Weight = request.Weight;
             user.Height = request.Height;
             user.BloodGroups = request.BloodGroup;
@@ -48,11 +50,9 @@ namespace WebAPI_Wa.Controllers
             user.ProxyMobileNumber = request.ProxyMobileNumber;
             user.ProxyDOB = request.ProxyDOB;
             user.ProxyAge = request.ProxyAge;
-            _context.Update(user);
+            _context.patients.Update(user);
             _context.SaveChanges();
             return Ok(true);
         }
-        [HttpPost]
-        public IActionResult GetDashBoardMetrics()
     }
 }

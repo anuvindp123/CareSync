@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using WebAPI_Wa.Models.CareSync;
 
 namespace WebAPI_Wa.Models
 {
@@ -15,7 +16,15 @@ namespace WebAPI_Wa.Models
         public DbSet<Order> orders { get; set; }
         public DbSet<Team> teams { get; set; }
         public DbSet<User> users { get; set; }
-        public DbSet<Patient> patient { get; set; }
-        
+
+
+        //CareSync
+        public DbSet<Patient> patients { get; set; }
+        public DbSet<Hospital> hospitals { get; set; }
+        public DbSet<DoctorPatientHospitalLinks> doctorPatientHospitalLinks { get; set; }
+        public DbSet<Doctor> doctors { get; set; }
+        public DbSet<Diseases> diseases { get; set; }
+        public DbSet<Consultation> consultations { get; set; }
+
     }
 }
