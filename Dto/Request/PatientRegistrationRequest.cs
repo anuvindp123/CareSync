@@ -20,6 +20,8 @@ namespace WebAPI_Wa.Dto.Request
     {
         public string Height { get; set; }
         public string Weight { get; set; }
+        public string Address { get; set; }
+        public int Pincode { get; set; }
         public BloodGroups BloodGroup { get; set; }
         public int Id { get; set; }
         public string ProxyName { get; set; }

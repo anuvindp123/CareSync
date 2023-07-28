@@ -59,8 +59,7 @@ namespace WebAPI_Wa.Controllers
             user.ProxyDOB = request.ProxyDOB.Date;
             user.ProxyDOB = request.ProxyDOB;
             user.Address = request.Address;
-            user.Pincode = request.Pincode;
-            user.ProxyAge = request.ProxyAge;
+            user.Pincode = request.Pincode;            
             _context.patients.Update(user);
             _context.SaveChanges();
             return Ok(true);
