@@ -16,6 +16,7 @@ namespace WebAPI_Wa.Repositories
         public async Task<int> AddPatient(Patient patient)
         {
             var ok = _context.patient.Add(patient);
+            _context.SaveChanges();
             return ok.Entity.Id;    
         }
     }

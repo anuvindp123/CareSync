@@ -15,7 +15,14 @@ namespace WebAPI_Wa.Models
         public string Password { get; set; }
         public Gender Sex { get; set; }
         public long uuid { get; set; }
+        public float Height { get; set; }
+        public float Weight { get; set; }
+        public BloodGroups BloodGroups { get; set; }
         public long MobileNumber { get; set; }
-
+        public string ProxyName { get; set; }
+        public string ProxyMobileNumber { get; set; }
+        public string ProxyEmail { get; set; }
+        public string ProxyAge { get; set; }
+        public DateTime ProxyDOB { get; set; }
     }
 }
