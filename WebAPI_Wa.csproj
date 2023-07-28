@@ -23,6 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Dto\Request\" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Models\Response\" />
   </ItemGroup>
 

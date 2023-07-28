@@ -18,9 +18,14 @@ namespace WebAPI_Wa
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.UseKestrel();
+                    webBuilder.UseIIS();
+                    
                     webBuilder.UseStartup<Startup>();
+                    
                 });
     }
 }
