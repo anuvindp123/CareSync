@@ -7,6 +7,8 @@ using System;
 using WebAPI_Wa.Models;
 using WebAPI_Wa.Dto.Response;
 using WebAPI_Wa.Dto.Request;
+using WebAPI_Wa.Models.CareSync;
+using System.Linq;
 
 namespace WebAPI_Wa.Controllers
 {
@@ -14,19 +16,27 @@ namespace WebAPI_Wa.Controllers
     [ApiController]
     public class DashboardController : ControllerBase
     {
+        private readonly Wa_DbContext _context;
+        public DashboardController(Wa_DbContext context)
+        {
+            _context = context;
+        }
         [HttpGet]
-        public async Task<ActionResult> GetHospitalCount()
+        public async Task<ActionResult> GetHospitalCount(int doctorId)
         {
             try
             {
                 GetHospitalCountRespone list = new GetHospitalCountRespone();
                 list.Hospitals = new List<HospitalsDto>();
-                HospitalsDto hospitalsDto1 = new HospitalsDto();
-                hospitalsDto1.Id = 1; hospitalsDto1.Name = "MIMS";
-                HospitalsDto hospitalsDto2 = new HospitalsDto();
-                hospitalsDto2.Id = 2; hospitalsDto2.Name = "Almas";
 
-                list.Hospitals.Add(hospitalsDto1); list.Hospitals.Add(hospitalsDto2);
+                var hospitalHospitalLink = _context.doctorHospitalsLink.Where(x => x.doctorId == doctorId).ToList();
+                foreach (var item in hospitalHospitalLink)
+                {
+                    var hospitalInfo = _context.hospitals.Where(x => x.Id == item.hospitalId).FirstOrDefault();
+                    HospitalsDto hospitalsDto1 = new HospitalsDto();
+                    hospitalsDto1.Id = hospitalInfo.Id; hospitalsDto1.Name = hospitalInfo.HospitalName;
+                    list.Hospitals.Add(hospitalsDto1);
+                }
                 return Ok(list);
 
             }
@@ -55,6 +65,11 @@ namespace WebAPI_Wa.Controllers
         [HttpPost]
         public async Task<ActionResult> DoctorPatientSync(DoctorPatientSyncRequest doctorPatientSyncRequest)
         {
+            var syncData = new DoctorPatientHospitalLinks();
+            syncData.DoctorId = doctorPatientSyncRequest.DoctorId;
+            syncData.DoctorId = doctorPatientSyncRequest.DoctorId;
+            _context.doctorPatientHospitalLinks.Add(syncData);
+            _context.SaveChanges();
             return Ok(true);
         }
 
