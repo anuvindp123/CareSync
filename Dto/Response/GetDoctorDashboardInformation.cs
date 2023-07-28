@@ -7,18 +7,18 @@
     }
     public class TotalConsultedCases
     {
-        public int IpCount { get; set; }
-        public int OpPort { get; set; }
+        public int ipCount { get; set; }
+        public int opCount { get; set; }
     }
     public class OnGoingConsultation
     {
-        public int IpCount { get; set; }
-        public int OpPort { get; set; }
-        public CriticalPersonPercentage criticalPersonPercentage { get; set; } = new CriticalPersonPercentage();
+        public int ipCount { get; set; }
+        public int opCount { get; set; }
+        public CriticalPersonCount criticalPersonPercentage { get; set; } = new CriticalPersonCount();
     }
-    public class CriticalPersonPercentage
+    public class CriticalPersonCount
     {
-        public int IpCount { get; set; }
-        public int OpPort { get; set; }
+        public int ipCount { get; set; }
+        public int opCount { get; set; }
     }
 }

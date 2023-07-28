@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System;
 using WebAPI_Wa.Models;
 using WebAPI_Wa.Dto.Response;
+using WebAPI_Wa.Dto.Request;
 
 namespace WebAPI_Wa.Controllers
 {
@@ -39,16 +40,22 @@ namespace WebAPI_Wa.Controllers
         {
             GetDoctorDashboardInformation getDoctorDashboardInformation = new GetDoctorDashboardInformation();
 
-            getDoctorDashboardInformation.totalConsultedCases.OpPort = 1000;
-            getDoctorDashboardInformation.totalConsultedCases.IpCount = 250;
+            getDoctorDashboardInformation.totalConsultedCases.opCount = 1000;
+            getDoctorDashboardInformation.totalConsultedCases.ipCount = 250;
 
-            getDoctorDashboardInformation.onGoingConsultation.IpCount = 25;
-            getDoctorDashboardInformation.onGoingConsultation.OpPort = 10;
+            getDoctorDashboardInformation.onGoingConsultation.ipCount = 25;
+            getDoctorDashboardInformation.onGoingConsultation.opCount = 10;
 
-            getDoctorDashboardInformation.onGoingConsultation.criticalPersonPercentage.IpCount = 4;
-            getDoctorDashboardInformation.onGoingConsultation.criticalPersonPercentage.OpPort = 5;
+            getDoctorDashboardInformation.onGoingConsultation.criticalPersonPercentage.ipCount = 4;
+            getDoctorDashboardInformation.onGoingConsultation.criticalPersonPercentage.opCount = 5;
 
             return Ok(getDoctorDashboardInformation);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> DoctorPatientSync(DoctorPatientSyncRequest doctorPatientSyncRequest)
+        {
+            return Ok(true);
         }
     }
 }
