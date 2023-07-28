@@ -7,7 +7,7 @@ namespace WebAPI_Wa.Models.CareSync
     public class Patient
     {
         public int Id { get; set; }
-        public int AadharId { get; set; }
+        public long AadharId { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
