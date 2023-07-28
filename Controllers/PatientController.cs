@@ -8,6 +8,7 @@ using WebAPI_Wa.Models.Enums;
 using WebAPI_Wa.Models.CareSync;
 using System.ComponentModel;
 using System.Reflection;
+using System.Threading.Tasks;
 using WebAPI_Wa.CommonFunctions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -32,7 +33,7 @@ namespace WebAPI_Wa.Controllers
             {
                 FirstName = request.FirstName,
                 LastName = request.LastName,
-
+                MiddleName = request.MiddleName,
                 AadharId = request.AadharId,
                 Email = request.Email,
                 MobileNumber = request.MobNumber,
@@ -92,6 +93,26 @@ namespace WebAPI_Wa.Controllers
             return result;
         }
 
+        [HttpPost]
+        public async Task<ActionResult> AddConsultation(CreateConsultationRequest request)
+        {
+            Consultation consultation = new Consultation();
+            consultation.HospitalId = request.HospitalId;
+            consultation.PatientId = request.PatientId;
+            consultation.DoctorId = request.DoctorId;
+            consultation.AdmissionDate = request.AdmissionDate;
+            consultation.DischargeDate = request.DischargeDate;
+            consultation.Treatment = request.Treatment;
+            consultation.Department = request.Department;
+            consultation.Disease = request.Disease;
+            consultation.Medications = request.Medications;
+            consultation.IsConsultationActive = request.IsConsultationActive;
+            consultation.ConsultationType = request.ConsultationType;
+
+            //todo 
+            //Add consulation using _context.Consultation
+            return Ok(consultation);
+        }
 
     }
 }

@@ -19,6 +19,14 @@ namespace WebAPI_Wa.Models.CareSync
         public string Weight { get; set; }
         public string BloodGroups { get; set; }
         public string MobileNumber { get; set; }
+        public string Address { get; set; }
+        public int Pincode { get; set; }
+        public Gender Sex { get; set; }
+        public long uuid { get; set; }
+        public float Height { get; set; }
+        public float Weight { get; set; }
+        public BloodGroups BloodGroups { get; set; }
+        public long MobileNumber { get; set; }
         public string ProxyName { get; set; }
         public string ProxyMobileNumber { get; set; }
         public string ProxyEmail { get; set; }

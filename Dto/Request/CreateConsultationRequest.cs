@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System;
+using WebAPI_Wa.Models.CareSync;
 using WebAPI_Wa.Models.Enums;
 
-namespace WebAPI_Wa.Models.CareSync
+namespace WebAPI_Wa.Dto.Request
 {
-    public class Consultation
+    public class CreateConsultationRequest
     {
-        public int Id { get; set; }
         public int PatientId { get; set; }
         public int HospitalId { get; set; }
         public int DoctorId { get; set; }

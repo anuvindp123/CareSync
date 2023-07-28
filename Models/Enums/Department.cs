@@ -2,15 +2,10 @@
 
 namespace WebAPI_Wa.Models.Enums
 {
-    public enum Department
+    public class Department
     {
-        [Description("General Medicine")]
-        GeneralMedicine = 0,
-        [Description("Orthopaedic")]
-        Orthopaedic = 1,
-        [Description("Nuerology")]
-        Nuerology = 2,
-        [Description("Gynaecology")]
-        Gynacology = 3,
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 }
