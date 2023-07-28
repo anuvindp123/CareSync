@@ -14,8 +14,8 @@ namespace WebAPI_Wa.Models.CareSync
         public DateTime AdmissionDate { get; set; }
         public DateTime? DischargeDate { get; set; }
         public string DoctorNote { get; set; }
-        public List<Medications> Medications { get; set; }
-        public List<Diseases> Disease { get; set; }
+        //public List<Medications> Medications { get; set; }
+        //public List<Diseases> Disease { get; set; }
         public string Treatment { get; set; }
         public Department Department { get; set; }
         public bool IsConsultationActive { get; set; }

@@ -32,8 +32,7 @@ namespace WebAPI_Wa.Controllers
             var user = new Patient
             {
                 FirstName = request.FirstName,
-                LastName = request.LastName,
-                MiddleName = request.MiddleName,
+                LastName = request.LastName,                
                 AadharId = request.AadharId,
                 Email = request.Email,
                 MobileNumber = request.MobNumber,
@@ -104,8 +103,8 @@ namespace WebAPI_Wa.Controllers
             consultation.DischargeDate = request.DischargeDate;
             consultation.Treatment = request.Treatment;
             consultation.Department = request.Department;
-            consultation.Disease = request.Disease;
-            consultation.Medications = request.Medications;
+         //   consultation.Disease = request.Disease;
+           // consultation.Medications = request.Medications;
             consultation.IsConsultationActive = request.IsConsultationActive;
             consultation.ConsultationType = request.ConsultationType;
 
