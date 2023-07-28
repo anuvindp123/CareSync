@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Manager\" />
     <Folder Include="Models\Requests\" />
   </ItemGroup>
 
