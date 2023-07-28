@@ -4,7 +4,7 @@ namespace WebAPI_Wa.Models.CareSync
 {
     public class PatientDiseases
     {
-        public Patient Patient { get; set; }
-        public List<Diseases> Diseases { get; set; }
+        public int PatientId { get; set; }
+        public int DiseasesId { get; set; }
     }
 }
