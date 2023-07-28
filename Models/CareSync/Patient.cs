@@ -9,11 +9,12 @@ namespace WebAPI_Wa.Models.CareSync
         public int Id { get; set; }
         public long AadharId { get; set; }
         public string FirstName { get; set; }
-        public string MiddleName { get; set; }
         public string LastName { get; set; }
         public DateTime DOB { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public string Address { get; set; }
+        public int Pincode { get; set; }
         public Gender Sex { get; set; }
         public long uuid { get; set; }
         public float Height { get; set; }

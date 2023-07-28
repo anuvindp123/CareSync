@@ -8,6 +8,7 @@ using WebAPI_Wa.Models.Enums;
 using WebAPI_Wa.Models.CareSync;
 using System.ComponentModel;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace WebAPI_Wa.Controllers
 {
@@ -28,12 +29,12 @@ namespace WebAPI_Wa.Controllers
             {
                 FirstName = request.FirstName,
                 LastName = request.LastName,
-                MiddleName = request.MiddleName,
                 AadharId = request.AadharId,
                 Email = request.Email,
                 MobileNumber = request.MobNumber,
                 DOB = request.DOB,
                 Password = request.Password,
+                BloodGroups = request.BloodGroup,
             };
             _context.patients.Add(user);
 
@@ -44,8 +45,7 @@ namespace WebAPI_Wa.Controllers
         {
             var user = _context.patients.Where(x => x.Id == request.Id).First();
             user.Weight = request.Weight;
-            user.Height = request.Height;
-            user.BloodGroups = request.BloodGroup;
+            user.Height = request.Height;           
             user.ProxyName = request.ProxyName;
             user.ProxyEmail = request.ProxyEmail;
             user.ProxyMobileNumber = request.ProxyMobileNumber;
@@ -93,8 +93,28 @@ namespace WebAPI_Wa.Controllers
                 result.Add(description);
             }
             return result;
-        }       
+        }
 
+        [HttpPost]
+        public async Task<ActionResult> AddConsultation(CreateConsultationRequest request)
+        {
+            Consultation consultation = new Consultation();
+            consultation.HospitalId = request.HospitalId;
+            consultation.PatientId = request.PatientId;
+            consultation.DoctorId = request.DoctorId;
+            consultation.AdmissionDate = request.AdmissionDate;
+            consultation.DischargeDate = request.DischargeDate;
+            consultation.Treatment = request.Treatment;
+            consultation.Department = request.Department;
+            consultation.Disease = request.Disease;
+            consultation.Medications = request.Medications;
+            consultation.IsConsultationActive = request.IsConsultationActive;
+            consultation.ConsultationType = request.ConsultationType;
+
+            //todo 
+            //Add consulation using _context.Consultation
+            return Ok(consultation);
+        }
 
     }
 }
