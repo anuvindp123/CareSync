@@ -27,5 +27,7 @@ namespace WebAPI_Wa.Dto.Request
         public string ProxyEmail { get; set; }
         public string ProxyAge { get; set; }
         public DateTime ProxyDOB { get; set; }
+        public string Address { get; set; }
+        public int Pincode { get; set; }
     }
 }

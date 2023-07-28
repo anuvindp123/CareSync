@@ -1,11 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace WebAPI_Wa.Models.CareSync
+﻿namespace WebAPI_Wa.Dto.Request
 {
-    public class Doctor
+    public class SaveDoctorRequest
     {
-        [Key]
-        public int Id { get; set; }
         public string Name { get; set; }
         public string MobileNumber { get; set; }
         public string Address { get; set; }

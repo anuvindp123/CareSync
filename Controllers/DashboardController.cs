@@ -21,7 +21,7 @@ namespace WebAPI_Wa.Controllers
         {
             _context = context;
         }
-        [HttpGet]
+        [HttpGet("GetHospitalCount")]
         public async Task<ActionResult> GetHospitalCount(int doctorId)
         {
             try
@@ -62,7 +62,7 @@ namespace WebAPI_Wa.Controllers
             return Ok(getDoctorDashboardInformation);
         }
 
-        [HttpPost]
+        [HttpPost("DoctorPatientSync")]
         public async Task<ActionResult> DoctorPatientSync(DoctorPatientSyncRequest doctorPatientSyncRequest)
         {
             var syncData = new DoctorPatientHospitalLinks();

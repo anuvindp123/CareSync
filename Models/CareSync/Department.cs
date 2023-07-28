@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace WebAPI_Wa.Models.Enums
+﻿namespace WebAPI_Wa.Models.CareSync
 {
     public class Department
     {

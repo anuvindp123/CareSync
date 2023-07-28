@@ -26,6 +26,9 @@ namespace WebAPI_Wa.Models
         public DbSet<Diseases> diseases { get; set; }
         public DbSet<Consultation> consultations { get; set; }
         public DbSet<DoctorHospitalsLink> doctorHospitalsLink { get; set; }
+        public DbSet<Department> department { get; set; }
+        public DbSet<HospitalDepartmentsLink> hospitalDepartmentsLink { get; set; }
+
 
     }
 }
