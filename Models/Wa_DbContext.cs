@@ -34,6 +34,9 @@ namespace WebAPI_Wa.Models
         public DbSet<ConsultationSpecialDates> consultationSpecialDates { get; set; }
         
         public DbSet<DoctorHospitalsLink> doctorHospitalsLink { get; set; }
+        public DbSet<Department> department { get; set; }
+        public DbSet<HospitalDepartmentsLink> hospitalDepartmentsLink { get; set; }
+
 
     }
 }

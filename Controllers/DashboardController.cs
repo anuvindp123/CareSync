@@ -22,7 +22,7 @@ namespace WebAPI_Wa.Controllers
         {
             _context = context;
         }
-        [HttpGet]
+        [HttpGet("GetHospitalCount")]
         public async Task<ActionResult> GetHospitalCount(int doctorId)
         {
             try

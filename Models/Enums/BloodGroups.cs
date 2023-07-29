@@ -4,21 +4,21 @@ namespace WebAPI_Wa.Models.Enums
 {
     public enum BloodGroups
     {
-        [Description("A Positive")]
+        [Description("A +ve")]
         APositive =0,
-        [Description("A Negative")]
+        [Description("A -ve")]
         ANegative =1,
-        [Description("B Positive")]
+        [Description("B +ve")]
         BPositive =2,
-        [Description("B Negative")]
+        [Description("B -ve")]
         BNegative = 3,
-        [Description("AB Positive")]
+        [Description("AB +ve")]
         ABPositive =4,
-        [Description("AB Negative")]
+        [Description("AB -ve")]
         ABNegative = 5,
-        [Description("O Positive")]
+        [Description("O +ve")]
         OPositive = 6,
-        [Description("O Negative")]
+        [Description("O -ve")]
         ONegative = 7,
         [Description("Bombay")]
         Bombay = 8,
