@@ -21,4 +21,11 @@
         public int ipCount { get; set; }
         public int opCount { get; set; }
     }
+    public class GetPrivateDoctorDashboardInformation
+    {
+        public TotalConsultedCases totalConsultedCases { get; set; } = new TotalConsultedCases();
+        public OnGoingConsultation onGoingConsultation { get; set; } = new OnGoingConsultation();
+        public int CriticalCount { get; set; }
+        public int LifeStyle { get; set; }
+    }
 }

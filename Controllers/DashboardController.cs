@@ -9,6 +9,7 @@ using WebAPI_Wa.Dto.Response;
 using WebAPI_Wa.Dto.Request;
 using WebAPI_Wa.Models.CareSync;
 using System.Linq;
+using WebAPI_Wa.Models.Enums;
 
 namespace WebAPI_Wa.Controllers
 {
@@ -62,7 +63,7 @@ namespace WebAPI_Wa.Controllers
             return Ok(getDoctorDashboardInformation);
         }
 
-        [HttpPost]
+        [HttpPost("DoctorPatientSync")]
         public async Task<ActionResult> DoctorPatientSync(DoctorPatientSyncRequest doctorPatientSyncRequest)
         {
             var syncData = new DoctorPatientHospitalLinks();
@@ -71,6 +72,24 @@ namespace WebAPI_Wa.Controllers
             _context.doctorPatientHospitalLinks.Add(syncData);
             _context.SaveChanges();
             return Ok(true);
+        }
+        [HttpPost("DoctorDashboardPrivate")]
+        public async Task<ActionResult>DoctorDashboardPrivate(int DoctorId)
+        {
+            GetPrivateDoctorDashboardInformation response = new GetPrivateDoctorDashboardInformation();
+            var consultations = _context.consultations.Where(x=>x.HospitalId == null && x.DoctorId == DoctorId && x.ConsultationType == ConsultationType.OutPatient).ToList();
+            response.totalConsultedCases.opCount = consultations.Count;
+            var onGoingConsultations = consultations.Where(x=>x.IsConsultationActive && x.ConsultationType == ConsultationType.OutPatient).ToList();
+            response.onGoingConsultation.opCount = onGoingConsultations.Count;
+            var PatientIds = consultations.Select(x => x.PatientId).ToList();
+            var patientDiseases = _context.patientDiseases.Where(x=>PatientIds.Contains(x.PatientId)).Select(x=>x.DiseasesId).ToList();
+            var diseases = _context.diseases.Where(x => patientDiseases.Contains(x.Id)).ToList();
+            var CriticalCount = diseases.Where(x=>x.Type ==  DiseaseType.Critical).Count();
+            var LifeStyleCount = diseases.Where(x=>x.Type ==  DiseaseType.LifeStyle).Count();
+            response.CriticalCount = CriticalCount;
+            response.LifeStyle = LifeStyleCount;
+            return Ok(response);
+
         }
 
     }
